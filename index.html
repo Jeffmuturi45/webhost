@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaHost - Fast, Secure & Reliable Web Hosting</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #343a40;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--secondary);
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .feature-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+        }
+        
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .toggle-label {
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background: var(--gradient);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+        .pricing-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-header {
+            background: var(--gradient);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .pricing-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .pricing-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .pricing-body {
+            padding: 30px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            padding: 100px 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-control {
+            border-radius: 30px;
+            padding: 12px 20px;
+            border: none;
+            margin-bottom: 15px;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .accordion-item {
+            border: none;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-button {
+            background-color: white;
+            font-weight: 500;
+            padding: 20px;
+            border: none;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: white;
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer h5 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer h5:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .features, .pricing, .newsletter, .faq {
+                padding: 80px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">NovaHost</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="pricing.html" class="btn btn-primary ms-lg-3">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="fade-in">Fast, Secure & Reliable Web Hosting</h1>
+                    <p class="fade-in">Experience blazing-fast website performance with our optimized hosting solutions. Get 99.9% uptime, free SSL certificates, and 24/7 expert support.</p>
+                    <a href="pricing.html" class="btn btn-primary btn-lg fade-in">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose NovaHost?</h2>
+                <p>We provide industry-leading hosting solutions with cutting-edge technology and exceptional support.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-box fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Lightning Fast</h3>
+                        <p>Our SSD-powered servers and optimized infrastructure ensure your website loads in milliseconds.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-box fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure Hosting</h3>
+                        <p>Advanced security measures including free SSL, DDoS protection, and malware scanning.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-box fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Our expert support team is available round the clock to assist you with any issues.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-box fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>99.9% Uptime</h3>
+                        <p>We guarantee 99.9% uptime with redundant infrastructure and proactive monitoring.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Flexible Pricing Plans</h2>
+                <p>Choose the perfect hosting plan for your website. All plans include our premium features.</p>
+            </div>
+            
+            <div class="pricing-toggle">
+                <span class="toggle-label">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="pricing-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Yearly</span>
+                <span class="badge bg-primary ms-2">Save 20%</span>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card fade-in">
+                        <div class="pricing-header">
+                            <h3>Starter</h3>
+                            <div class="pricing-price">
+                                <span class="monthly-price">$9.99</span>
+                                <span class="yearly-price d-none">$7.99</span>
+                                <span class="pricing-period">/month</span>
+                            </div>
+                            <p>Perfect for small websites</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> 1 Website</li>
+                                <li><i class="fas fa-check"></i> 10 GB SSD Storage</li>
+                                <li><i class="fas fa-check"></i> 100 GB Bandwidth</li>
+                                <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                                <li><i class="fas fa-check"></i> Standard Performance</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card fade-in">
+                        <div class="pricing-header">
+                            <h3>Professional</h3>
+                            <div class="pricing-price">
+                                <span class="monthly-price">$19.99</span>
+                                <span class="yearly-price d-none">$15.99</span>
+                                <span class="pricing-period">/month</span>
+                            </div>
+                            <p>Ideal for growing businesses</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> 10 Websites</li>
+                                <li><i class="fas fa-check"></i> 50 GB SSD Storage</li>
+                                <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                                <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                                <li><i class="fas fa-check"></i> Enhanced Performance</li>
+                                <li><i class="fas fa-check"></i> Daily Backups</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card fade-in">
+                        <div class="pricing-header">
+                            <h3>Enterprise</h3>
+                            <div class="pricing-price">
+                                <span class="monthly-price">$39.99</span>
+                                <span class="yearly-price d-none">$31.99</span>
+                                <span class="pricing-period">/month</span>
+                            </div>
+                            <p>For high-traffic websites</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Unlimited Websites</li>
+                                <li><i class="fas fa-check"></i> 200 GB SSD Storage</li>
+                                <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                                <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                                <li><i class="fas fa-check"></i> Maximum Performance</li>
+                                <li><i class="fas fa-check"></i> Daily Backups</li>
+                                <li><i class="fas fa-check"></i> Priority Support</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2 class="fade-in">Stay Updated</h2>
+            <p class="fade-in">Subscribe to our newsletter to receive the latest hosting tips, special offers, and industry news.</p>
+            <div class="newsletter-form fade-in">
+                <form action="https://docs.google.com/forms/d/e/1FAIpQLSfYOUR_FORM_ID_HERE/formResponse" method="POST">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email" name="entry.123456789" required>
+                        <button class="btn btn-light" type="submit">Subscribe</button>
+                    </div>
+                </form>
+                <small>We respect your privacy. Unsubscribe at any time.</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our hosting services.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What is the uptime guarantee?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer a 99.9% uptime guarantee. If we fall below this, you'll receive credit according to our Service Level Agreement.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Do you offer free SSL certificates?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, all our hosting plans include free Let's Encrypt SSL certificates to secure your website.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Can I upgrade my plan later?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Absolutely! You can upgrade your hosting plan at any time without any downtime. The change takes effect immediately.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Do you provide website migration services?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we offer free website migration for all new customers on our Professional and Enterprise plans.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    What payment methods do you accept?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We accept all major credit cards, PayPal, and bank transfers for annual plans.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>NovaHost</h5>
+                    <p>Providing reliable, high-performance web hosting solutions since 2015. Trusted by thousands of businesses worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Shared Hosting</a></li>
+                        <li><a href="#">VPS Hosting</a></li>
+                        <li><a href="#">Dedicated Servers</a></li>
+                        <li><a href="#">WordPress Hosting</a></li>
+                        <li><a href="#">Cloud Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Hosting St, Tech City</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope me-2"></i> support@novahost.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NovaHost. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Pricing Toggle
+        document.getElementById('pricing-toggle').addEventListener('change', function() {
+            const monthlyPrices = document.querySelectorAll('.monthly-price');
+            const yearlyPrices = document.querySelectorAll('.yearly-price');
+            
+            if (this.checked) {
+                monthlyPrices.forEach(price => price.classList.add('d-none'));
+                yearlyPrices.forEach(price => price.classList.remove('d-none'));
+            } else {
+                monthlyPrices.forEach(price => price.classList.remove('d-none'));
+                yearlyPrices.forEach(price => price.classList.add('d-none'));
+            }
+        });
+        
+        // Scroll to Top Button
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('active');
+            } else {
+                scrollToTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Fade-in Animation on Scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = function() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check in case elements are already in view
+        fadeInOnScroll();
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
